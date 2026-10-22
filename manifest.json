@@ -1,6 +1,6 @@
 {
-  "name": "Chipmunk Chat",
-  "short_name": "Chipmunk",
+  "name": "Spruce Home",
+  "short_name": "SpruceHome",
   "description": "Private encrypted chat, photos, voice and video",
   "start_url": ".",
   "scope": ".",
