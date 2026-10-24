@@ -1,5 +1,5 @@
-const C = 'sprucehome-v1';
-const ASSETS = ['./', 'index.html', 'manifest.json', 'icon.png', 'small-icon.png'];
+const C = 'spruce-v1';
+const ASSETS = ['./', 'index.html', 'manifest.json', 'icon.png', 'small-icon.png', 'icon-192.png', 'icon-512.png'];
 
 self.addEventListener('install', e => {
     e.waitUntil(caches.open(C).then(c => Promise.all(ASSETS.map(u => c.add(u).catch(() => {})))));
@@ -17,7 +17,10 @@ self.addEventListener('fetch', e => {
     if (e.request.method !== 'GET' || u.origin !== location.origin) return;
     e.respondWith(
         fetch(e.request)
-            .then(r => { const copy = r.clone(); caches.open(C).then(c => c.put(e.request, copy)); return r; })
+            .then(r => {
+                if (r.ok) { const copy = r.clone(); caches.open(C).then(c => c.put(e.request, copy)); }
+                return r;
+            })
             .catch(() => caches.match(e.request))
     );
 });
